@@ -22,10 +22,10 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
 
   const navigationItems = [
     { name: "Home", href: "#home", isHash: true },
-    { name: "About", href: "#about", isHash: true },
     { name: "Services", href: "#services", isHash: true },
-    { name: "QA", href: "#QA", isHash: true },
-    { name: "Contact", href: "#contact", isHash: true },
+    { name: "About", href: "#about", isHash: true },
+    { name: "Q&A", href: "#QA", isHash: true },
+    { name: "ContactUs", href: "#contact", isHash: true },
   ];
 
   // Handle scroll effect
@@ -64,6 +64,12 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
   const handleNavigation = (item: { name: string; href: string; isHash: boolean }) => {
     if (onNavigate) {
       onNavigate(item.href);
+      return;
+    }
+
+    // Special handling for Home - scroll to top
+    if (item.name === "Home") {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
 
