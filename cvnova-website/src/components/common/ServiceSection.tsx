@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface ServiceSectionProps {
   id?: string;
@@ -10,6 +11,7 @@ interface ServiceSectionProps {
   className?: string;
   imageWidth?: number;
   imageHeight?: number;
+  discoverMoreLink?: string;
 }
 
 const ServiceSection = ({
@@ -22,6 +24,7 @@ const ServiceSection = ({
   className = "",
   imageWidth = 600,
   imageHeight = 400,
+  discoverMoreLink = "#contact",
 }: ServiceSectionProps) => {
   const imageSection = (
     <div className="flex justify-center lg:justify-start">
@@ -50,15 +53,16 @@ const ServiceSection = ({
       
       {/* Discover More Button */}
       <div className="pt-4">
-        <a
-          href="#contact"
+        <Link
+          href={discoverMoreLink}
+          prefetch={true}
           className="inline-flex items-center px-6 py-3 bg-primary/10 text-primary font-medium rounded-full hover:bg-primary/20 transition-all duration-200 border border-primary/20 hover:border-primary/30"
         >
           Discover More
           <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
-        </a>
+        </Link>
       </div>
     </div>
   );

@@ -14,6 +14,8 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [scrollSpeed, setScrollSpeed] = useState(0);
 
   // Ensure hydration is complete
   useEffect(() => {
@@ -21,22 +23,37 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
   }, []);
 
   const navigationItems = [
-    { name: "Home", href: "#home", isHash: true },
+    { name: "Home", href: "/", isHash: false },
     { name: "Services", href: "#services", isHash: true },
     { name: "About", href: "#about", isHash: true },
     { name: "Q&A", href: "#QA", isHash: true },
     { name: "ContactUs", href: "#contact", isHash: true },
   ];
 
-  // Handle scroll effect
+  // Handle scroll effect with speed detection
   useEffect(() => {
+    let lastScrollTop = 0;
+    let scrollTimeout: NodeJS.Timeout;
+
     const handleScroll = () => {
       const scrollTop = window.scrollY;
+      const speed = Math.abs(scrollTop - lastScrollTop);
+      
       setIsScrolled(scrollTop > 20);
+      setScrollSpeed(speed);
+      
+      // Reset speed after scroll stops
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => setScrollSpeed(0), 150);
+      
+      lastScrollTop = scrollTop;
     };
 
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(scrollTimeout);
+    };
   }, []);
 
   // Handle click outside to close mobile menu
@@ -67,12 +84,19 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
       return;
     }
 
-    // Special handling for Home - scroll to top
+    // Handle Home navigation - always go to home page
     if (item.name === "Home") {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (pathname !== '/') {
+        // Navigate to home page
+        router.push('/');
+      } else {
+        // Already on home page, scroll to top
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
       return;
     }
 
+    // Handle other hash navigation items
     if (item.isHash && pathname !== '/') {
       router.push('/');
       setTimeout(() => scrollToSection(item.href), 300);
@@ -112,12 +136,47 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
           ? 'px-4 py-2' 
           : 'px-0 py-0'
       }`}>
-        <div className={`mx-auto transition-all duration-500 ${
-          isScrolled 
-            ? 'bg-transparent backdrop-blur-md rounded-2xl shadow-lg px-12 w-fit max-w-lg' 
-            : 'bg-transparent px-8 sm:px-12 lg:px-20 max-w-7xl'
-        }`}>
-          <div className={`flex items-center transition-all duration-500 ${
+        <div 
+          className={`mx-auto transition-all duration-500 relative ${
+            isScrolled 
+              ? 'bg-primary/20 backdrop-blur-md rounded-2xl shadow-lg px-12 w-fit max-w-lg' 
+              : 'bg-primary/20 px-8 sm:px-12 lg:px-20 w-full'
+          }`}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          {/* Animated Border - Only visible when scrolled */}
+          {isScrolled && (
+            <div className="absolute inset-0 rounded-2xl overflow-hidden">
+              {/* Static border */}
+              <div className="absolute inset-0 rounded-2xl border-2 border-primary/20"></div>
+              {/* SVG for border-following animation */}
+              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="transparent" />
+                    <stop offset="50%" stopColor="var(--primary)" />
+                    <stop offset="100%" stopColor="transparent" />
+                  </linearGradient>
+                </defs>
+                <rect
+                  x="2"
+                  y="2"
+                  width="96"
+                  height="96"
+                  rx="12"
+                  ry="12"
+                  fill="none"
+                  stroke="url(#lineGradient)"
+                  strokeWidth="1.5"
+                  strokeDasharray="6, 94"
+                  className={`animate-border-path ${isHovered ? 'paused' : ''} ${scrollSpeed > 5 ? 'fast' : scrollSpeed > 0 ? 'normal' : 'slow'}`}
+                />
+              </svg>
+              <div className="absolute inset-2 rounded-xl bg-primary/8 backdrop-blur-md"></div>
+            </div>
+          )}
+          <div className={`flex items-center transition-all duration-500 relative z-10 ${
             isScrolled 
               ? 'justify-center h-12' 
               : 'justify-center h-16'
@@ -129,10 +188,10 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
               <button
                 key={item.name}
                 onClick={() => handleNavigation(item)}
-                className={`relative transition-all duration-300 text-lg font-medium text-foreground/80 hover:text-foreground ${
+                className={`relative transition-all duration-300 text-lg font-medium text-foreground/90 hover:text-foreground ${
                   isScrolled 
-                    ? '' 
-                    : ''
+                    ? 'text-foreground/95' 
+                    : 'text-foreground/90'
                 }
                          after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 
                          after:bg-primary after:transition-all after:duration-300 
@@ -181,7 +240,7 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && isHydrated && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-md border-t border-border/20 shadow-lg">
+          <div className="md:hidden absolute top-full left-0 right-0 bg-primary/10 backdrop-blur-md border-t border-primary/20 shadow-lg">
             <div className="px-4 py-6 space-y-4">
               {navigationItems.map((item) => (
                 <button
@@ -190,7 +249,7 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
                     handleNavigation(item);
                     setIsMenuOpen(false);
                   }}
-                  className="block w-full text-left text-foreground/80 hover:text-foreground hover:bg-muted/50 px-3 py-2 rounded-lg transition-colors duration-200"
+                  className="block w-full text-left text-foreground/90 hover:text-foreground hover:bg-muted/50 px-3 py-2 rounded-lg transition-colors duration-200"
                 >
                   {item.name}
                 </button>

@@ -32,7 +32,6 @@
   --color-ring: var(--ring);
   --font-family-sans: var(--font-fredoka);
   --font-family-heading: var(--font-fredoka);
-  --font-family-heading-bold: var(--font-fredoka-bold);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -64,6 +63,50 @@ body {
   font-family: var(--font-heading), Arial, Helvetica, sans-serif;
 }
 
-.font-body {
-  font-family: var(--font-body), Arial, Helvetica, sans-serif;
+/* Custom animations */
+@keyframes border-path {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -100;
+  }
+}
+
+.animate-border-path {
+  animation: border-path 2s linear infinite;
+  transition: all 0.3s ease;
+}
+
+/* Speed variations */
+.animate-border-path.slow {
+  animation-duration: 3s;
+}
+
+.animate-border-path.normal {
+  animation-duration: 2s;
+}
+
+.animate-border-path.fast {
+  animation-duration: 1s;
+}
+
+/* Pause on hover */
+.animate-border-path.paused {
+  animation-play-state: paused;
+}
+
+/* Enhanced gradient for better visibility */
+#lineGradient stop:nth-child(2) {
+  stop-color: var(--primary);
+  animation: color-pulse 2s ease-in-out infinite;
+}
+
+@keyframes color-pulse {
+  0%, 100% {
+    stop-opacity: 1;
+  }
+  50% {
+    stop-opacity: 0.7;
+  }
 }

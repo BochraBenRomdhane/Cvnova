@@ -33,6 +33,7 @@ export default function Services() {
         title="Digital Presence & Product Development"
         description="We create modern websites,  mobile apps, and portfolios designed to bring your ideas, services, or business to life. Our focus is on building digital tools and platforms that help professionals, freelancers, and businesses showcase their skills, connect with clients, and grow online."
         imagePosition="left"
+        discoverMoreLink="/digital-presence"
       />
 
       {/* Personal & Career Branding - Service 1 */}
@@ -43,6 +44,7 @@ export default function Services() {
         title="Personal & Career Branding"
         description="We specialize in crafting tailored CVs and resumes that showcase your skills, experience, and achievements with precision and impact. Beyond documents, we optimize LinkedIn profiles to strengthen your online professional presence, helping you connect with opportunities and stand out in competitive markets. Our focus is on empowering individuals to present themselves confidently and professionally, turning career goals into tangible succes ."
         imagePosition="right"
+        discoverMoreLink="/personal-branding"
       />
     </div>
   );
