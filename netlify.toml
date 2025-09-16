@@ -1,6 +1,7 @@
 [build]
-  publish = "cvnova-website/out"
-  command = "cd cvnova-website && npm ci && npm run build"
+  base = "cvnova-website"
+  publish = "out"
+  command = "npm ci && npm run build" 
 
 [build.environment]
   NODE_VERSION = "20"
