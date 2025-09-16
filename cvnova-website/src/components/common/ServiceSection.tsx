@@ -26,10 +26,9 @@ const ServiceSection = ({
   imageHeight = 400,
   discoverMoreLink = "#contact",
 }: ServiceSectionProps) => {
-  const prefix = process.env.NODE_ENV === 'production' ? '/Cvnova/' : '/';
   const normalizedSrc = imageSrc.startsWith('http')
     ? imageSrc
-    : `${prefix}${imageSrc.replace(/^\//, '')}`;
+    : imageSrc;
 
   const imageSection = (
     <div className="flex justify-center lg:justify-start">

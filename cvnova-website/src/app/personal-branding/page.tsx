@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function PersonalBrandingPage() {
-    const prefix = process.env.NODE_ENV === 'production' ? '/Cvnova/' : '/';
     const steps = [
       {
         number: "1",
@@ -103,7 +102,7 @@ export default function PersonalBrandingPage() {
                       <div className={`w-2/5 ${step.position === 'left' ? 'order-2 ml-auto pr-12' : 'order-1 mr-auto pl-12'}`}>
                         <div className="flex justify-center">
                           <Image
-                            src={`${prefix}${step.image.replace(/^\//, '')}`}
+                            src={step.image}
                             alt={step.title}
                             width={180}
                             height={150}

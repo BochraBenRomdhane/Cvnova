@@ -1,7 +1,6 @@
 import Image from "next/image";
 
 export default function About() {
-  const prefix = process.env.NODE_ENV === 'production' ? '/Cvnova/' : '/';
   return (
     <div className="min-h-screen" id="about">
       {/* Header Section */}
@@ -29,7 +28,7 @@ export default function About() {
             {/* Image Section */}
             <div className="flex justify-center">
               <Image
-                src={`${prefix}about.png`}
+                src="/about.png"
                 alt="About CVNOVA Group - Professional services"
                 width={600}
                 height={400}

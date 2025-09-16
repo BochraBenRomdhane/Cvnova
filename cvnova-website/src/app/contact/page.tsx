@@ -254,7 +254,6 @@ const countryCodes = [
 ];
 
 export default function ContactPage() {
-  const prefix = process.env.NODE_ENV === 'production' ? '/Cvnova/' : '/';
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -515,7 +514,7 @@ export default function ContactPage() {
           <div className="flex justify-center lg:justify-end items-start lg:mt-0 relative">
             <div className="relative w-full max-w-xl">
               <Image
-                src={`${prefix}contact.png`}
+                src="/contact.png"
                 alt="Professional CV Services - Contact Us"
                 width={500}
                 height={400}

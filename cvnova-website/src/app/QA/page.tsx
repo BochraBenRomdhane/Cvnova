@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 
 export default function QA() {
-  const prefix = process.env.NODE_ENV === 'production' ? '/Cvnova/' : '/';
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const qaData = [
@@ -93,7 +92,7 @@ export default function QA() {
             {/* Image on the right */}
             <div className="flex justify-center lg:justify-center">
               <Image
-                src={`${prefix}qa.png`}
+                src="/qa.png"
                 alt="Q&A about our services"
                 width={800}
                 height={700}
