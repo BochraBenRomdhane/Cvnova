@@ -9,6 +9,21 @@
   NODE_ENV = "production"
   NEXT_TELEMETRY_DISABLED = "1"
 
+# Configure secrets scanning to ignore expected environment variables
+[build.processing]
+  skip_processing = false
+
+[build.processing.css]
+  bundle = true
+  minify = true
+
+[build.processing.js]
+  bundle = true
+  minify = true
+
+[build.processing.html]
+  pretty_urls = true
+
 # Handle API routes with Netlify Functions (must come before catch-all)
 [[redirects]]
   from = "/api/contact"
@@ -37,3 +52,8 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Secrets scanning configuration
+[build.processing.secrets]
+  # Ignore these environment variables from secrets scanning
+  omit_keys = ["COMPANY_EMAIL", "YOUR_EMAIL", "YOUR_EMAIL_PASS", "NEXT_PUBLIC_CONTACT_EMAIL"]

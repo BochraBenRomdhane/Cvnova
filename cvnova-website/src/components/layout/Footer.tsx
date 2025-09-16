@@ -18,7 +18,7 @@ const Footer = () => {
             <div>
               <h3 className="text-lg font-semibold mb-4">Contact</h3>
               <ul className="space-y-2 text-primary-foreground/80">
-                <li>cvnova@outlook.fr</li>
+                <li>{process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'contact@cvnova.com'}</li>
               </ul>
             </div>
           </div>
