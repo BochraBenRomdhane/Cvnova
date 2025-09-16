@@ -116,3 +116,23 @@ body {
 .debug-foreground-95 {
   color: rgba(23, 23, 23, 0.95) !important;
 }
+
+/* Custom floating animation for buttons */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Custom pulse animation for buttons */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}

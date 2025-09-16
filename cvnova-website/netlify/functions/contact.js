@@ -99,11 +99,10 @@ exports.handler = async (event, context) => {
     }
 
     // Check if environment variables are set
-    if (!process.env.YOUR_EMAIL || !process.env.YOUR_EMAIL_PASS || !process.env.COMPANY_EMAIL) {
+    if (!process.env.YOUR_EMAIL || !process.env.YOUR_EMAIL_PASS) {
       console.error('Missing environment variables:', {
         YOUR_EMAIL: !!process.env.YOUR_EMAIL,
-        YOUR_EMAIL_PASS: !!process.env.YOUR_EMAIL_PASS,
-        COMPANY_EMAIL: !!process.env.COMPANY_EMAIL
+        YOUR_EMAIL_PASS: !!process.env.YOUR_EMAIL_PASS
       });
       
       return {
@@ -132,9 +131,9 @@ exports.handler = async (event, context) => {
 
     // Email content
     const mailOptions = {
-      from: process.env.YOUR_EMAIL,
-      to: process.env.COMPANY_EMAIL,
-      subject: `New Contact Form Submission - ${formData.service}`,
+      from: `"CVnova Website" <${process.env.YOUR_EMAIL}>`,
+      to: 'cvnovawebsite@gmail.com',
+      subject: `New meeting - ${formData.service}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #8c52ff; border-bottom: 2px solid #8c52ff; padding-bottom: 10px;">

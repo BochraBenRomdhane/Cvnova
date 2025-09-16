@@ -56,4 +56,4 @@
 # Secrets scanning configuration
 [build.processing.secrets]
   # Ignore these environment variables from secrets scanning
-  omit_keys = ["COMPANY_EMAIL", "YOUR_EMAIL", "YOUR_EMAIL_PASS", "NEXT_PUBLIC_CONTACT_EMAIL"]
+  omit_keys = ["YOUR_EMAIL", "YOUR_EMAIL_PASS", "NEXT_PUBLIC_CONTACT_EMAIL"]

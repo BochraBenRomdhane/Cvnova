@@ -14,8 +14,6 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isHydrated, setIsHydrated] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [scrollSpeed, setScrollSpeed] = useState(0);
 
   // Ensure hydration is complete
   useEffect(() => {
@@ -30,29 +28,16 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
     { name: "ContactUs", href: "#contact", isHash: true },
   ];
 
-  // Handle scroll effect with speed detection
+  // Handle scroll effect
   useEffect(() => {
-    let lastScrollTop = 0;
-    let scrollTimeout: NodeJS.Timeout;
-
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const speed = Math.abs(scrollTop - lastScrollTop);
-      
       setIsScrolled(scrollTop > 20);
-      setScrollSpeed(speed);
-      
-      // Reset speed after scroll stops
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => setScrollSpeed(0), 150);
-      
-      lastScrollTop = scrollTop;
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      clearTimeout(scrollTimeout);
     };
   }, []);
 
@@ -156,44 +141,11 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
             backgroundColor: 'rgba(140, 82, 255, 0.2)',
             backdropFilter: isScrolled ? 'blur(12px)' : 'none'
           }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
         >
-          {/* Animated Border - Only visible when scrolled */}
-          {isScrolled && (
-            <div className="absolute inset-0 rounded-2xl overflow-hidden">
-              {/* Static border */}
-              <div className="absolute inset-0 rounded-2xl border-2 border-primary/20" style={{ borderColor: 'rgba(140, 82, 255, 0.2)' }}></div>
-              {/* SVG for border-following animation */}
-              <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <defs>
-                  <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="transparent" />
-                    <stop offset="50%" stopColor="var(--primary)" />
-                    <stop offset="100%" stopColor="transparent" />
-                  </linearGradient>
-                </defs>
-                <rect
-                  x="2"
-                  y="2"
-                  width="96"
-                  height="96"
-                  rx="12"
-                  ry="12"
-                  fill="none"
-                  stroke="url(#lineGradient)"
-                  strokeWidth="1.5"
-                  strokeDasharray="6, 94"
-                  className={`animate-border-path ${isHovered ? 'paused' : ''} ${scrollSpeed > 5 ? 'fast' : scrollSpeed > 0 ? 'normal' : 'slow'}`}
-                />
-              </svg>
-              <div className="absolute inset-2 rounded-xl bg-primary/8 backdrop-blur-md" style={{ backgroundColor: 'rgba(140, 82, 255, 0.08)' }}></div>
-            </div>
-          )}
           <div className={`flex items-center transition-all duration-500 relative z-10 ${
             isScrolled 
-              ? 'justify-center h-12' 
-              : 'justify-center h-16'
+              ? 'justify-end md:justify-center h-12' 
+              : 'justify-end md:justify-center h-16'
           }`}>
 
           {/* Desktop Navigation - Always centered */}
@@ -220,16 +172,19 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
           </div>
 
 
-          {/* Mobile menu button - Always visible on mobile */}
+          {/* Mobile menu button - Right side on mobile, center on desktop */}
           <button
             onClick={toggleMenu}
-            className={`md:hidden p-2 rounded-lg transition-colors duration-200 ${
+            className={`md:hidden p-3 rounded-xl transition-all duration-300 hover:scale-105 ${
               isScrolled 
-                ? 'text-foreground/70 hover:text-foreground hover:bg-muted/50' 
-                : 'text-foreground/80 hover:text-foreground hover:bg-muted'
+                ? 'bg-white/20 text-white hover:bg-white/30' 
+                : 'bg-primary/15 text-primary hover:bg-primary/25'
             }`}
             style={{ 
-              color: isScrolled ? 'rgba(23, 23, 23, 0.7)' : 'rgba(23, 23, 23, 0.8)' 
+              color: isScrolled ? '#ffffff' : '#8c52ff',
+              backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.2)' : 'rgba(140, 82, 255, 0.15)',
+              backdropFilter: 'blur(10px)',
+              border: isScrolled ? '1px solid rgba(255, 255, 255, 0.3)' : '1px solid rgba(140, 82, 255, 0.3)'
             }}
             aria-label="Toggle menu"
           >
@@ -275,11 +230,7 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
                   {item.name}
                 </button>
               ))}
-              <div className="pt-4 border-t border-border/20">
-                <button className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors duration-200" style={{ backgroundColor: '#8c52ff', color: '#ffffff' }}>
-                  Get Started
-                </button>
-              </div>
+
             </div>
           </div>
         )}

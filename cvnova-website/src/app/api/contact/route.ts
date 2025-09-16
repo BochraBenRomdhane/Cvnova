@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if environment variables are set
-    if (!process.env.YOUR_EMAIL || !process.env.YOUR_EMAIL_PASS || !process.env.COMPANY_EMAIL) {
+    if (!process.env.YOUR_EMAIL || !process.env.YOUR_EMAIL_PASS) {
       console.error('Missing environment variables');
       return NextResponse.json(
         { success: false, error: 'Server configuration error' },
@@ -46,8 +46,8 @@ export async function POST(request: NextRequest) {
 
     // Email content
     const mailOptions = {
-      from: process.env.YOUR_EMAIL,
-      to: process.env.COMPANY_EMAIL,
+      from: `"CVnova Website" <${process.env.YOUR_EMAIL}>`,
+      to: 'cvnovawebsite@gmail.com',
       subject: `New Contact Form Submission - ${formData.service}`,
       html: `
         <h2>New Contact Form Submission</h2>
@@ -77,3 +77,6 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+
+

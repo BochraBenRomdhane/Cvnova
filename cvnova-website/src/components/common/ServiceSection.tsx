@@ -60,10 +60,16 @@ const ServiceSection = ({
         <Link
           href={discoverMoreLink}
           prefetch={true}
-          className="inline-flex items-center px-6 py-3 bg-primary/10 text-primary font-medium rounded-full hover:bg-primary/20 transition-all duration-200 border border-primary/20 hover:border-primary/30"
+          className="group inline-flex items-center px-6 py-3 bg-primary/10 text-primary font-medium rounded-full hover:bg-primary/20 transition-all duration-300 border border-primary/20 hover:border-primary/30 hover:scale-105 hover:shadow-lg hover:shadow-primary/25 transform animate-pulse hover:animate-none"
+          style={{
+            backgroundColor: 'rgba(140, 82, 255, 0.1)',
+            color: '#8c52ff',
+            borderColor: 'rgba(140, 82, 255, 0.2)',
+            animation: 'float 3s ease-in-out infinite, pulse 2s ease-in-out infinite'
+          }}
         >
           Discover More
-          <svg className="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="ml-2 w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>
         </Link>
