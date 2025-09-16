@@ -281,12 +281,23 @@ export default function ContactPage() {
     setSubmitStatus("idle");
 
     try {
+      // Prepare the data for the API
+      const apiData = {
+        name: formData.name,
+        email: formData.email,
+        phone: `${formData.countryCode}${formData.phone}`,
+        service: formData.service,
+        message: formData.message,
+        preferredDate: formData.preferredDate,
+        preferredTime: formData.preferredTime
+      };
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(apiData),
       });
 
       const result = await response.json();

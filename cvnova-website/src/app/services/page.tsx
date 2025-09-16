@@ -28,7 +28,7 @@ export default function Services() {
       {/* Digital Presence & Product Development - Service 2 */}
       <ServiceSection
         id="digital-presence"
-        imageSrc="/mobile and web.png"
+        imageSrc="/mobile-and-web.png"
         imageAlt="Digital presence and product development services"
         title="Digital Presence & Product Development"
         description="We create modern websites,  mobile apps, and portfolios designed to bring your ideas, services, or business to life. Our focus is on building digital tools and platforms that help professionals, freelancers, and businesses showcase their skills, connect with clients, and grow online."
