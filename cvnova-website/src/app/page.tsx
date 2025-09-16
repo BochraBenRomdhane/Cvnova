@@ -1,6 +1,8 @@
-import dynamic from "next/dynamic";
+
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import dynamic from "next/dynamic";
+import HashScroll from "@/components/common/HashScroll";
 
 // Dynamic imports for better code splitting
 const Homy = dynamic(() => import("./home/page"), { ssr: true });
@@ -17,6 +19,7 @@ if (typeof window !== 'undefined') {
 export default function Home() {
   return (
     <div className="min-h-screen ">
+      <HashScroll />
       <Navbar />
       <div className="pt-25">
         <Homy />

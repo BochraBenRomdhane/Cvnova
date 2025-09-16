@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Home() {
   return (
@@ -9,7 +8,7 @@ export default function Home() {
           {/* Left Side - Image */}
           <div className="flex justify-center lg:justify-start">
             <Image
-              src="/craiyon_183430_image.png"
+              src="homeImage.png"
               alt="Professional presenting with global impact"
               width={800}
               height={800}
@@ -32,7 +31,7 @@ export default function Home() {
             
             {/* Call-to-Action */}
             <div className="pt-4 text-right text-2xl font-normal text-primary hover:text-primary/80 transition-colors duration-200">
-                Let's Build Something Unforgettable
+                Let&apos;s Build Something Unforgettable
             </div>
           </div>
         </div>

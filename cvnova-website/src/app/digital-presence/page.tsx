@@ -1,8 +1,10 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function DigitalPresencePage() {
+  const prefix = process.env.NODE_ENV === 'production' ? '/Cvnova/' : '/';
   const steps = [
     {
       number: "1",
@@ -114,12 +116,14 @@ export default function DigitalPresencePage() {
                     {/* Image on opposite side of the line */}
                     <div className={`w-2/5 ${step.position === 'left' ? 'order-2 ml-auto pr-12' : 'order-1 mr-auto pl-12'}`}>
                       <div className="flex justify-center">
-                        <img
-                          src={step.image}
+                        <Image
+                          src={`${prefix}${step.image.replace(/^\//, '')}`}
                           alt={step.title}
                           width={180}
                           height={150}
                           className="object-cover rounded-lg"
+                          loading="lazy"
+                          sizes="(max-width: 768px) 100vw, 180px"
                         />
                       </div>
                     </div>
@@ -136,7 +140,7 @@ export default function DigitalPresencePage() {
               Ready to Build Your Digital Presence?
             </h3>
             <p className="text-gray-600 mb-6">
-              Let's create something amazing together. Your digital transformation starts here!
+              Let&apos;s create something amazing together. Your digital transformation starts here!
             </p>
             <Link 
               href="/#contact"

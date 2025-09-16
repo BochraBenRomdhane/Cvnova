@@ -98,7 +98,8 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
 
     // Handle other hash navigation items
     if (item.isHash && pathname !== '/') {
-      router.push('/');
+      // Navigate to home first, then scroll to target section with retry
+      router.push('/', { scroll: false });
       setTimeout(() => scrollToSection(item.href), 300);
     } else if (item.isHash) {
       scrollToSection(item.href);
@@ -109,17 +110,26 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
 
   // Scroll to section
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      setTimeout(() => {
-        const element = document.querySelector(href);
-        if (element) {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }
-      }, 200);
-    }
+    const selector = href.startsWith('#') ? href : `#${href}`;
+    const tryScroll = () => {
+      const el = document.querySelector(selector);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return true;
+      }
+      return false;
+    };
+
+    if (tryScroll()) return;
+
+    let attempts = 0;
+    const maxAttempts = 20; // ~2s
+    const interval = setInterval(() => {
+      attempts += 1;
+      if (tryScroll() || attempts >= maxAttempts) {
+        clearInterval(interval);
+      }
+    }, 100);
   };
 
   return (

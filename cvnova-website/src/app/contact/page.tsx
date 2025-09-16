@@ -254,6 +254,7 @@ const countryCodes = [
 ];
 
 export default function ContactPage() {
+  const prefix = process.env.NODE_ENV === 'production' ? '/Cvnova/' : '/';
   const [formData, setFormData] = useState<FormData>({
     name: "",
     email: "",
@@ -329,7 +330,7 @@ export default function ContactPage() {
             Contact<span className="text-primary">Us</span>
           </h1>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Ready to transform your professional presence? Let's discuss how we can help you achieve your career goals.
+            Ready to transform your professional presence? Let&apos;s discuss how we can help you achieve your career goals.
           </p>
         </div>
 
@@ -340,8 +341,8 @@ export default function ContactPage() {
             <div>
               <h2 className="text-3xl font-bold text-foreground mb-4">Schedule a Meeting</h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                Tell us about your project and we'll get back to you within 48 hours.
-                We're here to help you build an outstanding professional presence.
+                Tell us about your project and we&apos;ll get back to you within 48 hours.
+                We&apos;re here to help you build an outstanding professional presence.
               </p>
             </div>
 
@@ -499,7 +500,7 @@ export default function ContactPage() {
               {/* Status */}
               {submitStatus === "success" && (
                 <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
-                  ✅ The meeting has been scheduled successfully! We'll get back to you within 48 hours.
+                  ✅ The meeting has been scheduled successfully! We&apos;ll get back to you within 48 hours.
                 </div>
               )}
               {submitStatus === "error" && (
@@ -514,7 +515,7 @@ export default function ContactPage() {
           <div className="flex justify-center lg:justify-end items-start lg:mt-0 relative">
             <div className="relative w-full max-w-xl">
               <Image
-                src="/contact.png"
+                src={`${prefix}contact.png`}
                 alt="Professional CV Services - Contact Us"
                 width={500}
                 height={400}
@@ -526,7 +527,7 @@ export default function ContactPage() {
               <div className="absolute -bottom-20 left-0 bg-background/95 backdrop-blur-sm border border-border rounded-xl p-6 shadow-xl w-full max-w-xs">
                 <div className="flex items-center gap-3 mb-3">
                   <div className="w-3 h-3 bg-primary rounded-full"></div>
-                  <h3 className="font-semibold text-foreground">Don't Miss Out!</h3>
+                  <h3 className="font-semibold text-foreground">Don&apos;t Miss Out!</h3>
                 </div>
                 <p className="text-sm text-muted-foreground">
                   Please enter valid information as we will contact you using these credentials.

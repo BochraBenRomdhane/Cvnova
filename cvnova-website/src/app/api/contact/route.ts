@@ -279,7 +279,7 @@ export async function POST(request: NextRequest) {
           <div class="content">
             <h2 class="section-title">📋 Client Information</h2>
             ${Object.entries(formData)
-              .filter(([key, value]) => value && value.toString().trim() !== '')
+              .filter(([, value]) => value && value.toString().trim() !== '')
               .map(([key, value]) => {
                 const displayKey = key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1');
                 const displayValue = value.toString().trim();
@@ -367,7 +367,7 @@ export async function POST(request: NextRequest) {
       subject: `New Client Meeting - ${formData.name} (${formData.service})`,
       html: htmlEmail,
       text: `New client meeting request received from ${formData.name}.\n\nContact Details:\n${Object.entries(formData)
-        .filter(([key, value]) => value && value.toString().trim() !== '')
+        .filter(([, value]) => value && value.toString().trim() !== '')
         .map(([key, value]) => `${key.charAt(0).toUpperCase() + key.slice(1).replace(/([A-Z])/g, ' $1')}: ${value.toString().trim()}`)
         .join('\n')}\n\nSubmitted on: ${new Date().toLocaleString('en-US', { 
         year: 'numeric', 

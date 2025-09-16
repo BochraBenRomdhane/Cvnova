@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function PersonalBrandingPage() {
+    const prefix = process.env.NODE_ENV === 'production' ? '/Cvnova/' : '/';
     const steps = [
       {
         number: "1",
@@ -102,7 +103,7 @@ export default function PersonalBrandingPage() {
                       <div className={`w-2/5 ${step.position === 'left' ? 'order-2 ml-auto pr-12' : 'order-1 mr-auto pl-12'}`}>
                         <div className="flex justify-center">
                           <Image
-                            src={step.image}
+                            src={`${prefix}${step.image.replace(/^\//, '')}`}
                             alt={step.title}
                             width={180}
                             height={150}
@@ -122,7 +123,7 @@ export default function PersonalBrandingPage() {
             {/* Call to Action */}
             <div className="text-center mt-20">
               <h3 className="text-xl font-semibold text-gray-900 mb-4">
-                Your Future Can't Wait!
+                Your Future Can&apos;t Wait!
               </h3>
               <p className="text-gray-600 mb-6">
                 Your dream career starts with a single step. Schedule your session today!

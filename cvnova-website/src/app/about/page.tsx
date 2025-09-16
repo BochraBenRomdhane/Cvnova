@@ -1,6 +1,7 @@
 import Image from "next/image";
 
 export default function About() {
+  const prefix = process.env.NODE_ENV === 'production' ? '/Cvnova/' : '/';
   return (
     <div className="min-h-screen" id="about">
       {/* Header Section */}
@@ -28,7 +29,7 @@ export default function About() {
             {/* Image Section */}
             <div className="flex justify-center">
               <Image
-                src="/about.png"
+                src={`${prefix}about.png`}
                 alt="About CVNOVA Group - Professional services"
                 width={600}
                 height={400}
@@ -45,7 +46,7 @@ export default function About() {
                 </p>
                 
                 <p className="text-lg text-muted-foreground leading-relaxed">
-                  Our mission is simple: provide the tools and expertise you need to grow, succeed, and stand out—whether you're advancing your career, building a business, or creating a digital presence that makes an impact.
+                  Our mission is simple: provide the tools and expertise you need to grow, succeed, and stand out—whether you&apos;re advancing your career, building a business, or creating a digital presence that makes an impact.
                 </p>
               </div>
             </div>
