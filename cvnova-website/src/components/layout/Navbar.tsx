@@ -136,7 +136,7 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
     <>
       {/* Fixed Logo - Always visible in left corner */}
       <div className="fixed top-4 left-4 z-50">
-        <Link href="/" className="text-2xl font-bold text-primary">
+        <Link href="/" className="text-2xl font-bold text-primary" style={{ color: '#8c52ff' }}>
           CVnova
         </Link>
       </div>
@@ -152,6 +152,10 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
               ? 'bg-primary/20 backdrop-blur-md rounded-2xl shadow-lg px-12 w-fit max-w-lg' 
               : 'bg-primary/20 px-8 sm:px-12 lg:px-20 w-full'
           }`}
+          style={{
+            backgroundColor: 'rgba(140, 82, 255, 0.2)',
+            backdropFilter: isScrolled ? 'blur(12px)' : 'none'
+          }}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
@@ -159,7 +163,7 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
           {isScrolled && (
             <div className="absolute inset-0 rounded-2xl overflow-hidden">
               {/* Static border */}
-              <div className="absolute inset-0 rounded-2xl border-2 border-primary/20"></div>
+              <div className="absolute inset-0 rounded-2xl border-2 border-primary/20" style={{ borderColor: 'rgba(140, 82, 255, 0.2)' }}></div>
               {/* SVG for border-following animation */}
               <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                 <defs>
@@ -183,7 +187,7 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
                   className={`animate-border-path ${isHovered ? 'paused' : ''} ${scrollSpeed > 5 ? 'fast' : scrollSpeed > 0 ? 'normal' : 'slow'}`}
                 />
               </svg>
-              <div className="absolute inset-2 rounded-xl bg-primary/8 backdrop-blur-md"></div>
+              <div className="absolute inset-2 rounded-xl bg-primary/8 backdrop-blur-md" style={{ backgroundColor: 'rgba(140, 82, 255, 0.08)' }}></div>
             </div>
           )}
           <div className={`flex items-center transition-all duration-500 relative z-10 ${
@@ -206,6 +210,9 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
                          after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 
                          after:bg-primary after:transition-all after:duration-300 
                          hover:after:w-full`}
+                style={{ 
+                  color: isScrolled ? 'rgba(23, 23, 23, 0.95)' : 'rgba(23, 23, 23, 0.9)' 
+                }}
               >
                 {item.name}
               </button>
@@ -221,6 +228,9 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
                 ? 'text-foreground/70 hover:text-foreground hover:bg-muted/50' 
                 : 'text-foreground/80 hover:text-foreground hover:bg-muted'
             }`}
+            style={{ 
+              color: isScrolled ? 'rgba(23, 23, 23, 0.7)' : 'rgba(23, 23, 23, 0.8)' 
+            }}
             aria-label="Toggle menu"
           >
             <svg
@@ -250,7 +260,7 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && isHydrated && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-primary/10 backdrop-blur-md border-t border-primary/20 shadow-lg">
+          <div className="md:hidden absolute top-full left-0 right-0 bg-primary/10 backdrop-blur-md border-t border-primary/20 shadow-lg" style={{ backgroundColor: 'rgba(140, 82, 255, 0.1)', borderTopColor: 'rgba(140, 82, 255, 0.2)' }}>
             <div className="px-4 py-6 space-y-4">
               {navigationItems.map((item) => (
                 <button
@@ -260,12 +270,13 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
                     setIsMenuOpen(false);
                   }}
                   className="block w-full text-left text-foreground/90 hover:text-foreground hover:bg-muted/50 px-3 py-2 rounded-lg transition-colors duration-200"
+                  style={{ color: 'rgba(23, 23, 23, 0.9)' }}
                 >
                   {item.name}
                 </button>
               ))}
               <div className="pt-4 border-t border-border/20">
-                <button className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors duration-200">
+                <button className="w-full bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:bg-primary/90 transition-colors duration-200" style={{ backgroundColor: '#8c52ff', color: '#ffffff' }}>
                   Get Started
                 </button>
               </div>

@@ -29,6 +29,9 @@ module.exports = {
         border: 'var(--border)',
         input: 'var(--input)',
         ring: 'var(--ring)',
+        // Explicit color values for debugging
+        'primary-explicit': '#8c52ff',
+        'foreground-explicit': '#171717',
       },
       fontFamily: {
         sans: ['var(--font-fredoka)', 'Arial', 'Helvetica', 'sans-serif'],

@@ -8,7 +8,7 @@ export default function Home() {
           {/* Left Side - Image */}
           <div className="flex justify-center lg:justify-start">
             <Image
-              src="homeImage.png"
+              src="/homeImage.png"
               alt="Professional presenting with global impact"
               width={800}
               height={800}

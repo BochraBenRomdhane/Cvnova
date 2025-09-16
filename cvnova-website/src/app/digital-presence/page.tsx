@@ -24,7 +24,7 @@ export default function DigitalPresencePage() {
       title: "Designing the Experience",
       description: "We craft a beautiful, user-friendly design that feels just right for your brand.",
       position: "left" as const,
-      image: "/mobile-and-web.png"
+      image: "/mobile and web.png"
     },
     {
       number: "4",
@@ -52,7 +52,7 @@ export default function DigitalPresencePage() {
       title: "Ongoing Support",
       description: "We stay with you, providing updates, fixes, and enhancements whenever needed.",
       position: "left" as const,
-      image: "/mobile-and-web.png"
+      image: "/mobile and web.png"
     }
   ];
 

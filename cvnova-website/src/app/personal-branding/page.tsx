@@ -24,7 +24,7 @@ export default function PersonalBrandingPage() {
         title: "Refine Together",
         description: "You'll have the chance to review the draft, share your thoughts, and request adjustments. We make sure every detail feels authentic and represents you at your best.",
         position: "left" as const,
-        image: "/mobile-and-web.png"
+        image: "/mobile and web.png"
       },
       {
         number: "4",
