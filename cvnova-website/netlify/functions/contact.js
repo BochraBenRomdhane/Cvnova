@@ -132,7 +132,7 @@ exports.handler = async (event, context) => {
     // Email content
     const mailOptions = {
       from: `"CVnova Website" <${process.env.YOUR_EMAIL}>`,
-      to: 'cvnovawebsite@gmail.com',
+      to: process.env.COMPANY_EMAIL,
       subject: `New meeting - ${formData.service}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">

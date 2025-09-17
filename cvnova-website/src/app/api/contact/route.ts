@@ -47,7 +47,7 @@ export async function POST(request: NextRequest) {
     // Email content
     const mailOptions = {
       from: `"CVnova Website" <${process.env.YOUR_EMAIL}>`,
-      to: 'cvnovawebsite@gmail.com',
+      to: process.env.COMPANY_EMAIL,
       subject: `New Contact Form Submission - ${formData.service}`,
       html: `
         <h2>New Contact Form Submission</h2>
