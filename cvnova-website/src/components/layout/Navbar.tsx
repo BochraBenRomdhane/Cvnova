@@ -126,15 +126,71 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
         </Link>
       </div>
 
+      {/* Mobile menu button - Always visible on mobile */}
+      <button
+        onClick={toggleMenu}
+        className="md:hidden fixed top-4 right-4 z-50 p-2 rounded-lg transition-colors duration-200 text-primary hover:text-primary/80 hover:bg-primary/20 border border-primary/20 hover:border-primary/40"
+        style={{ 
+          color: '#8c52ff',
+          backgroundColor: 'rgba(140, 82, 255, 0.2)',
+          borderColor: 'rgba(140, 82, 255, 0.2)'
+        }}
+        aria-label="Toggle menu"
+      >
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          {isMenuOpen ? (
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          ) : (
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          )}
+        </svg>
+      </button>
+
+      {/* Mobile Navigation - Always visible when open */}
+      {isMenuOpen && isHydrated && (
+        <div className="md:hidden fixed top-16 left-4 right-4 z-40 bg-primary/10 backdrop-blur-md border border-primary/20 shadow-lg rounded-lg" style={{ backgroundColor: 'rgba(140, 82, 255, 0.1)', borderColor: 'rgba(140, 82, 255, 0.2)' }}>
+          <div className="px-4 py-6 space-y-4">
+            {navigationItems.map((item) => (
+              <button
+                key={item.name}
+                onClick={() => {
+                  handleNavigation(item);
+                  setIsMenuOpen(false);
+                }}
+                className="block w-full text-left text-foreground/90 hover:text-foreground hover:bg-muted/50 px-3 py-2 rounded-lg transition-colors duration-200"
+                style={{ color: 'rgba(23, 23, 23, 0.9)' }}
+              >
+                {item.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
       <nav className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
         isScrolled 
-          ? 'px-4 py-2' 
+          ? 'px-4 py-2 md:block' 
           : 'px-0 py-0'
       }`}>
         <div 
           className={`mx-auto transition-all duration-500 relative ${
             isScrolled 
-              ? 'bg-primary/20 backdrop-blur-md rounded-2xl shadow-lg px-12 w-fit max-w-lg' 
+              ? 'bg-primary/20 backdrop-blur-md rounded-2xl shadow-lg px-12 w-fit max-w-lg md:block hidden' 
               : 'bg-primary/20 px-8 sm:px-12 lg:px-20 w-full'
           }`}
           style={{
@@ -144,8 +200,8 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
         >
           <div className={`flex items-center transition-all duration-500 relative z-10 ${
             isScrolled 
-              ? 'justify-end md:justify-center h-12' 
-              : 'justify-end md:justify-center h-16'
+              ? 'justify-center h-12' 
+              : 'justify-center h-16'
           }`}>
 
           {/* Desktop Navigation - Always centered */}
@@ -171,69 +227,8 @@ const Navbar = ({ onNavigate }: NavbarProps) => {
             ))}
           </div>
 
-
-          {/* Mobile menu button - Right side on mobile, center on desktop */}
-          <button
-            onClick={toggleMenu}
-            className={`md:hidden p-3 rounded-xl transition-all duration-300 hover:scale-105 ${
-              isScrolled 
-                ? 'bg-white/20 text-white hover:bg-white/30' 
-                : 'bg-primary/15 text-primary hover:bg-primary/25'
-            }`}
-            style={{ 
-              color: isScrolled ? '#ffffff' : '#8c52ff',
-              backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.2)' : 'rgba(140, 82, 255, 0.15)',
-              backdropFilter: 'blur(10px)',
-              border: isScrolled ? '1px solid rgba(255, 255, 255, 0.3)' : '1px solid rgba(140, 82, 255, 0.3)'
-            }}
-            aria-label="Toggle menu"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              {isMenuOpen ? (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              ) : (
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              )}
-            </svg>
-          </button>
         </div>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && isHydrated && (
-          <div className="md:hidden absolute top-full left-0 right-0 bg-primary/10 backdrop-blur-md border-t border-primary/20 shadow-lg" style={{ backgroundColor: 'rgba(140, 82, 255, 0.1)', borderTopColor: 'rgba(140, 82, 255, 0.2)' }}>
-            <div className="px-4 py-6 space-y-4">
-              {navigationItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => {
-                    handleNavigation(item);
-                    setIsMenuOpen(false);
-                  }}
-                  className="block w-full text-left text-foreground/90 hover:text-foreground hover:bg-muted/50 px-3 py-2 rounded-lg transition-colors duration-200"
-                  style={{ color: 'rgba(23, 23, 23, 0.9)' }}
-                >
-                  {item.name}
-                </button>
-              ))}
-
-            </div>
-          </div>
-        )}
         </div>
       </nav>
     </>
