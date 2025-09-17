@@ -10,54 +10,54 @@ export default function DigitalPresencePage() {
       title: "Understanding You",
       description: "We start by learning about your business, goals, and what your users need.",
       position: "left" as const,
-      image: "/homeImage.png"
+      image: "/meet.svg"
     },
     {
       number: "2", 
       title: "Planning Together",
       description: "We map out the features, timeline, and strategy so everything is clear from the start.",
       position: "right" as const,
-      image: "/about.png"
+      image: "/planing.svg"
     },
     {
       number: "3",
       title: "Designing the Experience",
       description: "We craft a beautiful, user-friendly design that feels just right for your brand.",
       position: "left" as const,
-      image: "/mobile and web.png"
+      image: "/designing.svg"
     },
     {
       number: "4",
       title: "Bringing It to Life",
       description: "Our team develops your app or website with care, making sure it works flawlessly.",
       position: "right" as const,
-      image: "/cvservice.png"
+      image: "/firstLaunch.svg"
     },
     {
       number: "5",
       title: "Testing & Fine-Tuning",
       description: "We thoroughly check everything to ensure a smooth, reliable experience.",
       position: "left" as const,
-      image: "/homeImage.png"
+      image: "/testing.svg"
     },
     {
       number: "6",
       title: "Launching with Confidence",
       description: "Your app or website goes live, ready for your audience.",
       position: "right" as const,
-      image: "/about.png"
+      image: "/lanching.svg"
     },
     {
       number: "7",
       title: "Ongoing Support",
       description: "We stay with you, providing updates, fixes, and enhancements whenever needed.",
       position: "left" as const,
-      image: "/mobile and web.png"
+      image: "/update.svg"
     }
   ];
 
   return (
-    <div className="min-h-screen">
+    <div>
       <Navbar />
       <div className="bg-white py-20" id="digital-presence">
         <div className="container mx-auto px-8">
@@ -86,23 +86,29 @@ export default function DigitalPresencePage() {
 
           {/* Timeline */}
           <div className="relative">
-            {/* Vertical dashed line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full border-l-4 border-dashed border-primary"></div>
+            {/* Vertical dashed line (desktop only) */}
+            <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full border-l-4 border-dashed border-primary"></div>
 
             {/* Steps */}
-            <div className="space-y-32">
+            <div className="space-y-12 md:space-y-32">
               {steps.map((step, index) => (
                 <div key={index} className="relative">
-                  {/* Step circle */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-16 h-16 bg-primary rounded-full flex items-center justify-center z-10 shadow-lg">
+                  {/* Step circle (desktop only) */}
+                  <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-16 h-16 bg-primary rounded-full items-center justify-center z-10 shadow-lg">
                     <span className="text-white font-bold text-lg">{step.number}</span>
                   </div>
 
                   {/* Step content */}
-                  <div className="flex items-center">
+                  <div className="flex flex-col md:flex-row items-center">
                     {/* Text content */}
-                    <div className={`w-2/5 ${step.position === 'left' ? 'order-1 mr-auto pl-12' : 'order-2 ml-auto pr-12'}`}>
+                    <div className={`w-full md:w-2/5 ${step.position === 'left' ? 'md:order-1 md:mr-auto md:pl-12' : 'md:order-2 md:ml-auto md:pr-12'} mb-6 md:mb-0`}>
                       <div className="bg-white">
+                        {/* Mobile step badge */}
+                        <div className="md:hidden mb-2">
+                          <span className="inline-flex w-10 h-10 items-center justify-center rounded-full bg-primary text-white font-semibold text-base shadow-md">
+                            {step.number}
+                          </span>
+                        </div>
                         <h3 className="text-2xl font-semibold text-gray-900 mb-4">
                           {step.title}
                         </h3>
@@ -113,7 +119,7 @@ export default function DigitalPresencePage() {
                     </div>
                     
                     {/* Image on opposite side of the line */}
-                    <div className={`w-2/5 ${step.position === 'left' ? 'order-2 ml-auto pr-12' : 'order-1 mr-auto pl-12'}`}>
+                    <div className={`w-full md:w-2/5 ${step.position === 'left' ? 'md:order-2 md:ml-auto md:pr-12' : 'md:order-1 md:mr-auto md:pl-12'}`}>
                       <div className="flex justify-center">
                         <Image
                           src={step.image}

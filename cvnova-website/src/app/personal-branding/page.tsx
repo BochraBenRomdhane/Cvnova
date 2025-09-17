@@ -10,40 +10,40 @@ export default function PersonalBrandingPage() {
         title: "Share Your Story",
         description: "We start by getting to know you — your experience, achievements, and career goals. This helps us understand where you've been and where you want to go.",
         position: "left" as const,
-        image: "/homeImage.png"
+        image: "/sharingstory.svg"
       },
       {
         number: "2", 
         title: "Crafting Your CV/Resume",
         description: "With your story in hand, we carefully create a CV or resume that highlights your strengths and presents your career journey with clarity and impact.",
         position: "right" as const,
-        image: "/about.png"
+        image: "/buildingcv.svg"
       },
       {
         number: "3",
         title: "Refine Together",
         description: "You'll have the chance to review the draft, share your thoughts, and request adjustments. We make sure every detail feels authentic and represents you at your best.",
         position: "left" as const,
-        image: "/mobile and web.png"
+        image: "/updatecv.svg"
       },
       {
         number: "4",
         title: "Interview Preparation",
         description: "Once your CV is ready, we prepare you for interviews — from practical tips to mock sessions — so you can step into every opportunity with confidence.",
         position: "right" as const,
-        image: "/cvservice.png"
+        image: "/prapareinter.svg"
       },
       {
         number: "5",
         title: "Step Forward with Confidence",
         description: "You leave not only with a powerful CV but also with the skills and self-assurance to pursue your next career move.",
         position: "left" as const,
-        image: "/homeImage.png"
+        image: "/startcareer.svg"
       }
     ];
   
     return (
-      <div className="min-h-screen">
+      <div>
         <Navbar />
         <div className="bg-white py-20" id="personal-branding">
         <div className="container mx-auto px-8">
@@ -72,23 +72,29 @@ export default function PersonalBrandingPage() {
   
             {/* Timeline */}
             <div className="relative">
-              {/* Vertical dashed line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full border-l-4 border-dashed border-primary"></div>
+              {/* Vertical dashed line (desktop only) */}
+              <div className="hidden md:block absolute left-1/2 transform -translate-x-1/2 w-1 h-full border-l-4 border-dashed border-primary"></div>
 
               {/* Steps */}
-              <div className="space-y-32">
+              <div className="space-y-12 md:space-y-32">
                 {steps.map((step, index) => (
                   <div key={index} className="relative">
-                    {/* Step circle */}
-                    <div className="absolute left-1/2 transform -translate-x-1/2 w-16 h-16 bg-primary rounded-full flex items-center justify-center z-10 shadow-lg">
+                    {/* Step circle (desktop only) */}
+                    <div className="hidden md:flex absolute left-1/2 transform -translate-x-1/2 w-16 h-16 bg-primary rounded-full items-center justify-center z-10 shadow-lg">
                       <span className="text-white font-bold text-lg">{step.number}</span>
                     </div>
 
                     {/* Step content */}
-                    <div className="flex items-center">
+                    <div className="flex flex-col md:flex-row items-center">
                       {/* Text content */}
-                      <div className={`w-2/5 ${step.position === 'left' ? 'order-1 mr-auto pl-12' : 'order-2 ml-auto pr-12'}`}>
+                      <div className={`w-full md:w-2/5 ${step.position === 'left' ? 'md:order-1 md:mr-auto md:pl-12' : 'md:order-2 md:ml-auto md:pr-12'} mb-6 md:mb-0`}>
                         <div className="bg-white">
+                          {/* Mobile step badge */}
+                          <div className="md:hidden mb-2">
+                            <span className="inline-flex w-10 h-10 items-center justify-center rounded-full bg-primary text-white font-semibold text-base shadow-md">
+                              {step.number}
+                            </span>
+                          </div>
                           <h3 className="text-2xl font-semibold text-gray-900 mb-4">
                             {step.title}
                           </h3>
@@ -99,7 +105,7 @@ export default function PersonalBrandingPage() {
                       </div>
                       
                       {/* Image on opposite side of the line */}
-                      <div className={`w-2/5 ${step.position === 'left' ? 'order-2 ml-auto pr-12' : 'order-1 mr-auto pl-12'}`}>
+                      <div className={`w-full md:w-2/5 ${step.position === 'left' ? 'md:order-2 md:ml-auto md:pr-12' : 'md:order-1 md:mr-auto md:pl-12'}`}>
                         <div className="flex justify-center">
                           <Image
                             src={step.image}
